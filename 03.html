@@ -1,0 +1,1364 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>智能健身 - 您的专属健康伙伴</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        :root {
+            --primary-blue: #2A4B8D;
+            --secondary-blue: #4A76B8;
+            --light-blue: #E8F4FF;
+            --primary-yellow: #FFD166;
+            --secondary-yellow: #FFEDCC;
+            --dark-text: #333333;
+            --light-text: #FFFFFF;
+            --shadow: 0 4px 8px rgba(0,0,0,0.1);
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+
+        body {
+            background-color: #f5f7fa;
+            color: var(--dark-text);
+            line-height: 1.6;
+        }
+
+        .container {
+            width: 90%;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+
+        /* 顶部导航 */
+        header {
+            background: linear-gradient(135deg, var(--primary-blue), var(--secondary-blue));
+            color: var(--light-text);
+            padding: 15px 0;
+            box-shadow: var(--shadow);
+            position: sticky;
+            top: 0;
+            z-index: 100;
+        }
+
+        .top-nav {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            font-size: 24px;
+            font-weight: bold;
+            display: flex;
+            align-items: center;
+        }
+
+        .logo i {
+            margin-right: 10px;
+            color: var(--primary-yellow);
+        }
+
+        .logo span {
+            color: var(--primary-yellow);
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 25px;
+        }
+
+        .nav-links a {
+            color: var(--light-text);
+            text-decoration: none;
+            font-weight: 500;
+            padding: 8px 12px;
+            border-radius: 4px;
+            transition: all 0.3s ease;
+        }
+
+        .nav-links a:hover {
+            background-color: rgba(255, 255, 255, 0.2);
+            transform: translateY(-2px);
+        }
+
+        /* 英雄区域 */
+        .hero {
+            background: linear-gradient(rgba(42, 75, 141, 0.8), rgba(42, 75, 141, 0.9)), url('https://images.unsplash.com/photo-1534438327276-14e5300c3a48?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80');
+            background-size: cover;
+            background-position: center;
+            color: var(--light-text);
+            padding: 80px 0;
+            text-align: center;
+            border-radius: 0 0 20px 20px;
+            margin-bottom: 40px;
+        }
+
+        .hero h1 {
+            font-size: 42px;
+            margin-bottom: 20px;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
+        }
+
+        .hero p {
+            font-size: 18px;
+            max-width: 700px;
+            margin: 0 auto 30px;
+        }
+
+        .cta-button {
+            display: inline-block;
+            background-color: var(--primary-yellow);
+            color: var(--primary-blue);
+            padding: 12px 30px;
+            border-radius: 30px;
+            text-decoration: none;
+            font-weight: bold;
+            font-size: 18px;
+            transition: all 0.3s ease;
+            box-shadow: var(--shadow);
+        }
+
+        .cta-button:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 6px 12px rgba(0,0,0,0.15);
+        }
+
+        /* 励志文案 */
+        .motivation {
+            background-color: var(--secondary-yellow);
+            padding: 20px;
+            border-radius: 10px;
+            margin-bottom: 30px;
+            text-align: center;
+            border-left: 5px solid var(--primary-yellow);
+        }
+
+        .motivation p {
+            font-size: 20px;
+            font-style: italic;
+            color: var(--primary-blue);
+        }
+
+        /* 功能模块 */
+        .section-title {
+            text-align: center;
+            margin: 40px 0 20px;
+            color: var(--primary-blue);
+            position: relative;
+        }
+
+        .section-title:after {
+            content: '';
+            display: block;
+            width: 80px;
+            height: 4px;
+            background-color: var(--primary-yellow);
+            margin: 10px auto;
+            border-radius: 2px;
+        }
+
+        .card-container {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+            gap: 25px;
+            margin-bottom: 40px;
+        }
+
+        .card {
+            background-color: white;
+            border-radius: 10px;
+            overflow: hidden;
+            box-shadow: var(--shadow);
+            transition: transform 0.3s ease;
+        }
+
+        .card:hover {
+            transform: translateY(-5px);
+        }
+
+        .card-header {
+            background-color: var(--secondary-blue);
+            color: white;
+            padding: 15px;
+            text-align: center;
+        }
+
+        .card-body {
+            padding: 20px;
+        }
+
+        .sports-list, .diet-list {
+            list-style-type: none;
+        }
+
+        .sports-list li, .diet-list li {
+            padding: 10px 0;
+            border-bottom: 1px solid #eee;
+        }
+
+        .sports-list li:last-child, .diet-list li:last-child {
+            border-bottom: none;
+        }
+
+        .sports-list a {
+            color: var(--secondary-blue);
+            text-decoration: none;
+            font-weight: 500;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .sports-list a:hover {
+            color: var(--primary-blue);
+            text-decoration: underline;
+        }
+
+        .external-link {
+            font-size: 12px;
+            color: var(--primary-yellow);
+            background-color: var(--primary-blue);
+            padding: 2px 6px;
+            border-radius: 10px;
+        }
+
+        /* 生成专属计划板块 */
+        .plan-generator {
+            background-color: var(--light-blue);
+            padding: 30px;
+            border-radius: 15px;
+            margin-bottom: 40px;
+            box-shadow: var(--shadow);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .plan-generator::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            right: 0;
+            width: 40%;
+            height: 100%;
+            background: url('https://images.unsplash.com/photo-1571019613454-1cb2f99b2d8b?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80') no-repeat center center;
+            background-size: cover;
+            opacity: 0.1;
+            z-index: 0;
+        }
+
+        .plan-form {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 20px;
+            margin-bottom: 25px;
+            position: relative;
+            z-index: 1;
+        }
+
+        .form-group {
+            margin-bottom: 15px;
+        }
+
+        .form-group label {
+            display: block;
+            margin-bottom: 8px;
+            font-weight: 500;
+            color: var(--primary-blue);
+        }
+
+        .form-control {
+            width: 100%;
+            padding: 10px 15px;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            font-size: 16px;
+            transition: border 0.3s;
+        }
+
+        .form-control:focus {
+            outline: none;
+            border-color: var(--secondary-blue);
+            box-shadow: 0 0 0 2px rgba(74, 118, 184, 0.2);
+        }
+
+        .generate-btn {
+            background-color: var(--primary-yellow);
+            color: var(--primary-blue);
+            border: none;
+            padding: 12px 25px;
+            border-radius: 30px;
+            font-weight: bold;
+            font-size: 16px;
+            cursor: pointer;
+            transition: all 0.3s;
+            display: block;
+            margin: 0 auto;
+            box-shadow: var(--shadow);
+            position: relative;
+            z-index: 1;
+        }
+
+        .generate-btn:hover {
+            background-color: #ffc745;
+            transform: translateY(-2px);
+        }
+
+        .plan-result {
+            background-color: white;
+            padding: 25px;
+            border-radius: 10px;
+            margin-top: 25px;
+            box-shadow: var(--shadow);
+            display: none;
+            position: relative;
+            z-index: 1;
+        }
+
+        .plan-result.active {
+            display: block;
+            animation: fadeIn 0.5s ease;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(10px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        .plan-result h3 {
+            color: var(--primary-blue);
+            margin-bottom: 15px;
+            text-align: center;
+        }
+
+        .plan-details {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 20px;
+        }
+
+        .plan-section {
+            background-color: var(--light-blue);
+            padding: 15px;
+            border-radius: 8px;
+        }
+
+        .plan-section h4 {
+            color: var(--secondary-blue);
+            margin-bottom: 10px;
+            padding-bottom: 5px;
+            border-bottom: 1px solid var(--secondary-blue);
+        }
+
+        /* 周计划按钮 */
+        .week-plan-btn {
+            background-color: var(--secondary-blue);
+            color: white;
+            border: none;
+            padding: 12px 25px;
+            border-radius: 30px;
+            font-weight: bold;
+            font-size: 16px;
+            cursor: pointer;
+            transition: all 0.3s;
+            display: block;
+            margin: 20px auto;
+            box-shadow: var(--shadow);
+            position: relative;
+            z-index: 1;
+        }
+
+        .week-plan-btn:hover {
+            background-color: var(--primary-blue);
+            transform: translateY(-2px);
+        }
+
+        /* 周计划模态框 */
+        .modal {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.7);
+            z-index: 1000;
+            overflow-y: auto;
+        }
+
+        .modal-content {
+            background-color: white;
+            margin: 5% auto;
+            padding: 30px;
+            border-radius: 15px;
+            width: 90%;
+            max-width: 1000px;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.3);
+            position: relative;
+        }
+
+        .close-modal {
+            position: absolute;
+            top: 15px;
+            right: 20px;
+            font-size: 28px;
+            font-weight: bold;
+            cursor: pointer;
+            color: var(--primary-blue);
+        }
+
+        .week-plan-container {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+            gap: 20px;
+        }
+
+        .day-plan {
+            background-color: var(--light-blue);
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: var(--shadow);
+        }
+
+        .day-plan h4 {
+            color: var(--primary-blue);
+            margin-bottom: 15px;
+            text-align: center;
+            border-bottom: 2px solid var(--primary-yellow);
+            padding-bottom: 10px;
+        }
+
+        /* 运动卡片样式 */
+        .sport-card {
+            text-align: center;
+            margin-bottom: 20px;
+        }
+
+        .sport-card img {
+            width: 100%;
+            height: 200px;
+            object-fit: cover;
+            border-radius: 10px;
+            margin-bottom: 10px;
+            transition: transform 0.3s ease;
+        }
+
+        .sport-card:hover img {
+            transform: scale(1.05);
+        }
+
+        .sport-card h3 {
+            color: var(--primary-blue);
+            margin-bottom: 10px;
+        }
+
+        .sport-card p {
+            color: #666;
+            font-size: 14px;
+            margin-bottom: 15px;
+        }
+
+        /* 每日计划 */
+        .daily-plan {
+            background-color: var(--light-blue);
+            padding: 25px;
+            border-radius: 10px;
+            margin-bottom: 40px;
+            border: 2px dashed var(--secondary-blue);
+        }
+
+        .plan-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 20px;
+        }
+
+        .date-display {
+            font-weight: bold;
+            color: var(--primary-blue);
+        }
+
+        .plan-content {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 20px;
+        }
+
+        .exercise-plan, .diet-plan {
+            background-color: white;
+            padding: 15px;
+            border-radius: 8px;
+            box-shadow: var(--shadow);
+        }
+
+        .exercise-plan h3, .diet-plan h3 {
+            color: var(--secondary-blue);
+            margin-bottom: 10px;
+            padding-bottom: 5px;
+            border-bottom: 2px solid var(--secondary-yellow);
+        }
+
+        /* 页脚 */
+        footer {
+            background-color: var(--primary-blue);
+            color: var(--light-text);
+            padding: 30px 0;
+            text-align: center;
+            margin-top: 40px;
+        }
+
+        .footer-links {
+            display: flex;
+            justify-content: center;
+            gap: 20px;
+            margin-bottom: 20px;
+        }
+
+        .footer-links a {
+            color: var(--light-text);
+            text-decoration: none;
+        }
+
+        .footer-links a:hover {
+            text-decoration: underline;
+        }
+
+        .copyright {
+            font-size: 14px;
+            opacity: 0.8;
+        }
+
+        /* 响应式设计 */
+        @media (max-width: 768px) {
+            .nav-links {
+                flex-wrap: wrap;
+                gap: 10px;
+                justify-content: center;
+            }
+
+            .hero h1 {
+                font-size: 32px;
+            }
+
+            .plan-form, .plan-content, .plan-details {
+                grid-template-columns: 1fr;
+            }
+            
+            .plan-generator::before {
+                display: none;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- 顶部导航 -->
+    <header>
+        <div class="container">
+            <div class="top-nav">
+                <div class="logo"><i class="fas fa-dumbbell"></i>智能<span>健身</span></div>
+                <div class="nav-links">
+                    <a href="#sports-types">运动类型</a>
+                    <a href="#diet-advice">饮食建议</a>
+                    <a href="#plan-generator">专属计划</a>
+                    <a href="#daily-plan">每日计划</a>
+                    <a href="#motivation">励志语录</a>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <!-- 英雄区域 -->
+    <section class="hero">
+        <div class="container">
+            <h1>健康生活，从智能健身开始</h1>
+            <p>为您提供专业的健身指导、科学的饮食建议和个性化的健身计划，助您达成健康目标</p>
+            <a href="#plan-generator" class="cta-button">生成我的专属计划</a>
+        </div>
+    </section>
+
+    <div class="container">
+        <!-- 励志文案 -->
+        <section class="motivation" id="motivation">
+            <p>"健康的身体是灵魂的客厅，而病弱的身体是灵魂的监狱。" - 弗朗西斯·培根</p>
+        </section>
+
+        <!-- 生成专属计划板块 -->
+        <section id="plan-generator">
+            <h2 class="section-title">生成个人专属每日计划</h2>
+            <div class="plan-generator">
+                <div class="plan-form">
+                    <!-- 新增个人信息 -->
+                    <div class="form-group">
+                        <label for="gender">性别</label>
+                        <select id="gender" class="form-control">
+                            <option value="male">男性</option>
+                            <option value="female">女性</option>
+                        </select>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="age">年龄</label>
+                        <select id="age" class="form-control">
+                            <option value="18-25">18-25岁</option>
+                            <option value="26-35">26-35岁</option>
+                            <option value="36-45">36-45岁</option>
+                            <option value="46-55">46-55岁</option>
+                            <option value="56+">56岁以上</option>
+                        </select>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="height">身高</label>
+                        <select id="height" class="form-control">
+                            <option value="150-160">150-160cm</option>
+                            <option value="161-170">161-170cm</option>
+                            <option value="171-180">171-180cm</option>
+                            <option value="181-190">181-190cm</option>
+                            <option value="191+">191cm以上</option>
+                        </select>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="weight">体重</label>
+                        <select id="weight" class="form-control">
+                            <option value="40-50">40-50kg</option>
+                            <option value="51-60">51-60kg</option>
+                            <option value="61-70">61-70kg</option>
+                            <option value="71-80">71-80kg</option>
+                            <option value="81-90">81-90kg</option>
+                            <option value="91+">91kg以上</option>
+                        </select>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="fitness-goal">健身目标</label>
+                        <select id="fitness-goal" class="form-control">
+                            <option value="weight-loss">减脂瘦身</option>
+                            <option value="muscle-gain">增肌塑形</option>
+                            <option value="endurance">提高耐力</option>
+                            <option value="flexibility">增强柔韧性</option>
+                            <option value="general">保持健康</option>
+                        </select>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="fitness-level">健身水平</label>
+                        <select id="fitness-level" class="form-control">
+                            <option value="beginner">初学者</option>
+                            <option value="intermediate">中级水平</option>
+                            <option value="advanced">高级水平</option>
+                        </select>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="workout-frequency">每周训练天数</label>
+                        <select id="workout-frequency" class="form-control">
+                            <option value="3">3天/周</option>
+                            <option value="4">4天/周</option>
+                            <option value="5">5天/周</option>
+                            <option value="6">6天/周</option>
+                        </select>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="workout-duration">每次训练时长</label>
+                        <select id="workout-duration" class="form-control">
+                            <option value="30">30分钟</option>
+                            <option value="45">45分钟</option>
+                            <option value="60">60分钟</option>
+                            <option value="90">90分钟</option>
+                        </select>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="available-equipment">可用器材</label>
+                        <select id="available-equipment" class="form-control">
+                            <option value="bodyweight">无器械(自重训练)</option>
+                            <option value="dumbbells">哑铃</option>
+                            <option value="full-gym">健身房全套器材</option>
+                            <option value="home-basic">家庭基础器材</option>
+                            <option value="resistance-band">阻力带</option>
+                        </select>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="diet-preference">饮食偏好</label>
+                        <select id="diet-preference" class="form-control">
+                            <option value="balanced">均衡饮食</option>
+                            <option value="high-protein">高蛋白</option>
+                            <option value="low-carb">低碳水</option>
+                            <option value="vegetarian">素食</option>
+                            <option value="vegan">纯素</option>
+                            <option value="mediterranean">地中海饮食</option>
+                            <option value="keto">生酮饮食</option>
+                        </select>
+                    </div>
+                </div>
+
+                <button class="generate-btn" id="generate-plan">生成我的专属计划</button>
+
+                <div class="plan-result" id="plan-result">
+                    <h3>您的专属健身计划</h3>
+                    <div class="plan-details">
+                        <div class="plan-section">
+                            <h4>训练安排</h4>
+                            <div id="workout-plan">
+                                <!-- 动态生成训练计划 -->
+                            </div>
+                        </div>
+                        <div class="plan-section">
+                            <h4>饮食建议</h4>
+                            <div id="diet-plan">
+                                <!-- 动态生成饮食计划 -->
+                            </div>
+                        </div>
+                    </div>
+                    <button class="week-plan-btn" id="show-week-plan">查看周计划</button>
+                </div>
+            </div>
+        </section>
+
+        <!-- 运动类型板块 -->
+        <section id="sports-types">
+            <h2 class="section-title">运动类型</h2>
+            <div class="card-container">
+                <div class="sport-card">
+                    <a href="https://baike.baidu.com/item/跑步" target="_blank">
+                        <img src="https://images.unsplash.com/photo-1552674605-db6ffd4facb5?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80" alt="跑步">
+                        <h3>跑步</h3>
+                        <p>最简单有效的有氧运动，提升心肺功能和耐力</p>
+                    </a>
+                </div>
+                <div class="sport-card">
+                    <a href="https://baike.baidu.com/item/游泳" target="_blank">
+                        <img src="https://images.unsplash.com/photo-1544551763-46a013bb70d5?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80" alt="游泳">
+                        <h3>游泳</h3>
+                        <p>全身性运动，对关节友好，有效燃烧脂肪</p>
+                    </a>
+                </div>
+                <div class="sport-card">
+                    <a href="https://baike.baidu.com/item/瑜伽" target="_blank">
+                        <img src="https://images.unsplash.com/photo-1544367567-0f2fcb009e0b?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80" alt="瑜伽">
+                        <h3>瑜伽</h3>
+                        <p>提升柔韧性、平衡能力和身体控制力</p>
+                    </a>
+                </div>
+                <div class="sport-card">
+                    <a href="https://baike.baidu.com/item/力量训练" target="_blank">
+                        <img src="https://images.unsplash.com/photo-1534367507877-0edd93bd013b?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80" alt="力量训练">
+                        <h3>力量训练</h3>
+                        <p>增加肌肉量，提升基础代谢率，塑造身体线条</p>
+                    </a>
+                </div>
+                <div class="sport-card">
+                    <a href="https://baike.baidu.com/item/骑行" target="_blank">
+                        <img src="https://images.unsplash.com/photo-1488646953014-85cb44e25828?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80" alt="骑行">
+                        <h3>骑行</h3>
+                        <p>低冲击有氧运动，锻炼腿部肌肉和心肺功能</p>
+                    </a>
+                </div>
+                <div class="sport-card">
+                    <a href="https://baike.baidu.com/item/拳击" target="_blank">
+                        <img src="https://images.unsplash.com/photo-1549719386-74dfcbf7dbed?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80" alt="拳击">
+                        <h3>拳击</h3>
+                        <p>高强度全身运动，提升爆发力和协调性</p>
+                    </a>
+                </div>
+                <div class="sport-card">
+                    <a href="https://baike.baidu.com/item/划船机" target="_blank">
+                        <img src="https://images.unsplash.com/photo-1506744038136-46273834b3fb?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80" alt="划船机">
+                        <h3>划船机</h3>
+                        <p>高效全身有氧与力量结合，提升心肺和肌耐力</p>
+                    </a>
+                </div>
+                <div class="sport-card">
+                    <a href="https://baike.baidu.com/item/有氧舞蹈" target="_blank">
+                        <img src="https://images.unsplash.com/photo-1517841905240-472988babdf9?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80" alt="有氧舞蹈">
+                        <h3>有氧舞蹈</h3>
+                        <p>趣味性强，燃脂效果佳，提升协调性和柔韧性</p>
+                    </a>
+                </div>
+                <div class="sport-card">
+                    <a href="https://baike.baidu.com/item/登山" target="_blank">
+                        <img src="https://images.unsplash.com/photo-1465101046530-73398c7f28ca?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80" alt="登山">
+                        <h3>登山</h3>
+                        <p>自然环境下的耐力训练，增强体能与意志力</p>
+                    </a>
+                </div>
+                <div class="sport-card">
+                    <a href="https://baike.baidu.com/item/普拉提" target="_blank">
+                        <img src="https://images.unsplash.com/photo-1448375240586-882707db888b?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80" alt="普拉提">
+                        <h3>普拉提</h3>
+                        <p>核心力量训练，提升姿态与柔韧性</p>
+                    </a>
+                </div>
+                <!-- 新增运动种类 -->
+                <div class="sport-card">
+                    <a href="https://baike.baidu.com/item/跳绳" target="_blank">
+                        <img src="https://images.unsplash.com/photo-1595435742668-00f56ac0dafa?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80" alt="跳绳">
+                        <h3>跳绳</h3>
+                        <p>高效燃脂运动，提升协调性和心肺功能</p>
+                    </a>
+                </div>
+                <div class="sport-card">
+                    <a href="https://baike.baidu.com/item/HIIT" target="_blank">
+                        <img src="https://images.unsplash.com/photo-1571019613454-1cb2f99b2d8b?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80" alt="HIIT">
+                        <h3>HIIT</h3>
+                        <p>高强度间歇训练，短时高效燃脂</p>
+                    </a>
+                </div>
+                <div class="sport-card">
+                    <a href="https://baike.baidu.com/item/羽毛球" target="_blank">
+                        <img src="https://images.unsplash.com/photo-1626224583764-f87db24ac4ea?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80" alt="羽毛球">
+                        <h3>羽毛球</h3>
+                        <p>全身性运动，锻炼反应能力和协调性</p>
+                    </a>
+                </div>
+                <div class="sport-card">
+                    <a href="https://baike.baidu.com/item/篮球" target="_blank">
+                        <img src="https://images.unsplash.com/photo-1546519638-68e109498ffc?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80" alt="篮球">
+                        <h3>篮球</h3>
+                        <p>团队运动，提升爆发力、耐力和协调性</p>
+                    </a>
+                </div>
+                <div class="sport-card">
+                    <a href="https://baike.baidu.com/item/网球" target="_blank">
+                        <img src="https://images.unsplash.com/photo-1595341888016-a392ef81b7de?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80" alt="网球">
+                        <h3>网球</h3>
+                        <p>全身协调性运动，提升心肺功能和耐力</p>
+                    </a>
+                </div>
+                <div class="sport-card">
+                    <a href="https://baike.baidu.com/item/排球" target="_blank">
+                        <img src="https://images.unsplash.com/photo-1612872087720-bb876e2e67d1?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80" alt="排球">
+                        <h3>排球</h3>
+                        <p>团队协作运动，提升反应能力和协调性</p>
+                    </a>
+                </div>
+                <div class="sport-card">
+                    <a href="https://baike.baidu.com/item/高尔夫" target="_blank">
+                        <img src="https://images.unsplash.com/photo-1535131749006-b7f58c99034b?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80" alt="高尔夫">
+                        <h3>高尔夫</h3>
+                        <p>精准控制运动，提升专注力和身体协调性</p>
+                    </a>
+                </div>
+                <div class="sport-card">
+                    <a href="https://baike.baidu.com/item/滑雪" target="_blank">
+                        <img src="https://images.unsplash.com/photo-1508779454322-9e0c539f4b45?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80" alt="滑雪">
+                        <h3>滑雪</h3>
+                        <p>冬季极限运动，提升平衡能力和腿部力量</p>
+                    </a>
+                </div>
+                <div class="sport-card">
+                    <a href="https://baike.baidu.com/item/登山" target="_blank">
+                        <img src="https://images.unsplash.com/photo-1464822759844-d62dda5c49d5?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80" alt="登山">
+                        <h3>登山</h3>
+                        <p>全身性有氧运动，锻炼心肺功能和腿部力量</p>
+                    </a>
+                </div>
+                <div class="sport-card">
+                    <a href="https://baike.baidu.com/item/攀岩" target="_blank">
+                        <img src="https://images.unsplash.com/photo-1544367567-0f2fcb009e0b?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80" alt="攀岩">
+                        <h3>攀岩</h3>
+                        <p>全身力量与技巧结合，提升核心力量和协调性</p>
+                    </a>
+                </div>
+            </div>
+        </section>
+
+        <!-- 饮食建议板块 -->
+        <section id="diet-advice">
+            <h2 class="section-title">饮食建议</h2>
+            <div class="card-container">
+                <div class="card">
+                    <div class="card-header">
+                        <h3>健康饮食原则</h3>
+                    </div>
+                    <div class="card-body">
+                        <ul class="diet-list">
+                            <li><i class="fas fa-check" style="color: var(--primary-yellow);"></i> 均衡摄入蛋白质、碳水化合物和健康脂肪</li>
+                            <li><i class="fas fa-check" style="color: var(--primary-yellow);"></i> 多吃新鲜蔬菜和水果</li>
+                            <li><i class="fas fa-check" style="color: var(--primary-yellow);"></i> 控制盐分和糖分摄入</li>
+                            <li><i class="fas fa-check" style="color: var(--primary-yellow);"></i> 保持充足水分摄入</li>
+                            <li><i class="fas fa-check" style="color: var(--primary-yellow);"></i> 适量摄入膳食纤维</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <div class="card">
+                    <div class="card-header">
+                        <h3>增肌饮食</h3>
+                    </div>
+                    <div class="card-body">
+                        <ul class="diet-list">
+                            <li><i class="fas fa-dumbbell" style="color: var(--primary-yellow);"></i> 增加优质蛋白质摄入(鸡胸肉、鱼、蛋、豆制品)</li>
+                            <li><i class="fas fa-bread-slice" style="color: var(--primary-yellow);"></i> 适量增加碳水化合物(全麦面包、燕麦、糙米)</li>
+                            <li><i class="fas fa-seedling" style="color: var(--primary-yellow);"></i> 健康脂肪(坚果、橄榄油、牛油果)</li>
+                            <li><i class="fas fa-clock" style="color: var(--primary-yellow);"></i> 训练前后补充能量和蛋白质</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <div class="card">
+                    <div class="card-header">
+                        <h3>减脂饮食</h3>
+                    </div>
+                    <div class="card-body">
+                        <ul class="diet-list">
+                            <li><i class="fas fa-weight" style="color: var(--primary-yellow);"></i> 控制总热量摄入</li>
+                            <li><i class="fas fa-carrot" style="color: var(--primary-yellow);"></i> 增加蔬菜摄入量</li>
+                            <li><i class="fas fa-apple-alt" style="color: var(--primary-yellow);"></i> 选择低GI值碳水化合物</li>
+                            <li><i class="fas fa-cookie" style="color: var(--primary-yellow);"></i> 避免高糖饮料和加工食品</li>
+                            <li><i class="fas fa-utensils" style="color: var(--primary-yellow);"></i> 规律三餐，避免暴饮暴食</li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="card">
+                    <div class="card-header">
+                        <h3>素食建议</h3>
+                    </div>
+                    <div class="card-body">
+                        <ul class="diet-list">
+                            <li><i class="fas fa-leaf" style="color: var(--primary-yellow);"></i> 多样化植物蛋白来源(豆类、坚果、藜麦)</li>
+                            <li><i class="fas fa-carrot" style="color: var(--primary-yellow);"></i> 保证铁、锌和维生素B12摄入</li>
+                            <li><i class="fas fa-apple-alt" style="color: var(--primary-yellow);"></i> 丰富水果和蔬菜</li>
+                            <li><i class="fas fa-seedling" style="color: var(--primary-yellow);"></i> 健康脂肪摄入(橄榄油、牛油果)</li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="card">
+                    <div class="card-header">
+                        <h3>地中海饮食</h3>
+                    </div>
+                    <div class="card-body">
+                        <ul class="diet-list">
+                            <li><i class="fas fa-fish" style="color: var(--primary-yellow);"></i> 多吃鱼类、橄榄油、坚果</li>
+                            <li><i class="fas fa-bread-slice" style="color: var(--primary-yellow);"></i> 全谷物主食</li>
+                            <li><i class="fas fa-apple-alt" style="color: var(--primary-yellow);"></i> 丰富水果蔬菜</li>
+                            <li><i class="fas fa-wine-glass-alt" style="color: var(--primary-yellow);"></i> 适量红酒(如不忌酒)</li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="card">
+                    <div class="card-header">
+                        <h3>生酮饮食</h3>
+                    </div>
+                    <div class="card-body">
+                        <ul class="diet-list">
+                            <li><i class="fas fa-bacon" style="color: var(--primary-yellow);"></i> 高脂肪、适量蛋白、极低碳水</li>
+                            <li><i class="fas fa-egg" style="color: var(--primary-yellow);"></i> 鸡蛋、肉类、奶酪为主</li>
+                            <li><i class="fas fa-seedling" style="color: var(--primary-yellow);"></i> 选择低碳水蔬菜(如西兰花、菠菜)</li>
+                            <li><i class="fas fa-tint" style="color: var(--primary-yellow);"></i> 补充足够水分，注意电解质平衡</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- 每日计划 -->
+        <section id="daily-plan">
+            <h2 class="section-title">今日健身计划</h2>
+            <div class="daily-plan">
+                <div class="plan-header">
+                    <h3>个性化计划</h3>
+                    <div class="date-display" id="current-date">2025年10月27日</div>
+                </div>
+                <div class="plan-content">
+                    <div class="exercise-plan">
+                        <h3><i class="fas fa-running"></i> 今日运动安排</h3>
+                        <ul>
+                            <li><i class="far fa-clock"></i> 热身：10分钟动态拉伸</li>
+                            <li><i class="fas fa-heartbeat"></i> 有氧运动：30分钟慢跑</li>
+                            <li><i class="fas fa-dumbbell"></i> 力量训练：上肢训练(3组，每组12次)</li>
+                            <li><i class="fas fa-fire"></i> 核心训练：平板支撑(3组，每组45秒)</li>
+                            <li><i class="fas fa-wind"></i> 放松：10分钟静态拉伸</li>
+                        </ul>
+                    </div>
+                    <div class="diet-plan">
+                        <h3><i class="fas fa-utensils"></i> 今日饮食建议</h3>
+                        <ul>
+                            <li><i class="fas fa-sun"></i> 早餐：全麦面包+鸡蛋+牛奶+水果</li>
+                            <li><i class="fas fa-cloud-sun"></i> 午餐：糙米饭+鸡胸肉+蔬菜沙拉</li>
+                            <li><i class="fas fa-apple-alt"></i> 加餐：酸奶+坚果</li>
+                            <li><i class="fas fa-moon"></i> 晚餐：烤鱼+蔬菜+红薯</li>
+                            <li><i class="fas fa-tint"></i> 饮水：至少2升水</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </div>
+
+    <!-- 周计划模态框 -->
+    <div id="week-plan-modal" class="modal">
+        <div class="modal-content">
+            <span class="close-modal">&times;</span>
+            <h2 class="section-title">您的专属周计划</h2>
+            <div class="week-plan-container" id="week-plan-container">
+                <!-- 周计划内容将通过JavaScript动态生成 -->
+            </div>
+        </div>
+    </div>
+
+    <!-- 页脚 -->
+    <footer>
+        <div class="container">
+            <div class="footer-links">
+                <a href="#sports-types">运动类型</a>
+                <a href="#diet-advice">饮食建议</a>
+                <a href="#plan-generator">专属计划</a>
+                <a href="#daily-plan">每日计划</a>
+                <a href="#motivation">励志语录</a>
+            </div>
+            <div class="copyright">
+                <p>&copy; 2025 智能健身 - 您的专属健康伙伴 | 设计：蓝色与黄色主题</p>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // 设置当前日期
+        function setCurrentDate() {
+            const now = new Date();
+            const options = { year: 'numeric', month: 'long', day: 'numeric' };
+            document.getElementById('current-date').textContent = now.toLocaleDateString('zh-CN', options);
+        }
+
+        // 健身计划生成器（根据多条件）
+        document.getElementById('generate-plan').addEventListener('click', function() {
+            const gender = document.getElementById('gender').value;
+            const age = document.getElementById('age').value;
+            const height = document.getElementById('height').value;
+            const weight = document.getElementById('weight').value;
+            const goal = document.getElementById('fitness-goal').value;
+            const level = document.getElementById('fitness-level').value;
+            const frequency = document.getElementById('workout-frequency').value;
+            const duration = document.getElementById('workout-duration').value;
+            const equipment = document.getElementById('available-equipment').value;
+            const diet = document.getElementById('diet-preference').value;
+
+            // 生成一周计划
+            const weekPlan = generateWeekPlan(gender, age, height, weight, goal, level, frequency, duration, equipment, diet);
+            
+            // 显示当天计划
+            document.getElementById('workout-plan').innerHTML = weekPlan[0].workout;
+            document.getElementById('diet-plan').innerHTML = weekPlan[0].diet;
+
+            // 存储周计划数据
+            document.getElementById('plan-result').setAttribute('data-week-plan', JSON.stringify(weekPlan));
+
+            document.getElementById('plan-result').classList.add('active');
+            document.getElementById('plan-result').scrollIntoView({ behavior: 'smooth' });
+        });
+
+        // 生成周计划
+        function generateWeekPlan(gender, age, height, weight, goal, level, frequency, duration, equipment, diet) {
+            const weekPlan = [];
+            const daysOfWeek = ['周一', '周二', '周三', '周四', '周五', '周六', '周日'];
+            
+            // 根据训练频率确定训练日和休息日
+            const trainingDays = parseInt(frequency);
+            const restDays = 7 - trainingDays;
+            
+            // 随机分配训练日和休息日
+            let trainingSchedule = Array(7).fill(false);
+            for (let i = 0; i < trainingDays; i++) {
+                let randomDay;
+                do {
+                    randomDay = Math.floor(Math.random() * 7);
+                } while (trainingSchedule[randomDay]);
+                trainingSchedule[randomDay] = true;
+            }
+            
+            // 为每一天生成计划
+            for (let i = 0; i < 7; i++) {
+                if (trainingSchedule[i]) {
+                    // 训练日
+                    weekPlan.push({
+                        day: daysOfWeek[i],
+                        workout: generateWorkoutPlan(gender, age, height, weight, goal, level, frequency, duration, equipment, i),
+                        diet: generateDietPlan(gender, age, height, weight, goal, diet, i)
+                    });
+                } else {
+                    // 休息日
+                    weekPlan.push({
+                        day: daysOfWeek[i],
+                        workout: generateRestDayPlan(),
+                        diet: generateDietPlan(gender, age, height, weight, goal, diet, i)
+                    });
+                }
+            }
+            
+            return weekPlan;
+        }
+
+        // 训练计划生成（多条件分支）
+        function generateWorkoutPlan(gender, age, height, weight, goal, level, frequency, duration, equipment, dayIndex) {
+            // 运动项目库
+            const warmupOptions = [
+                "5分钟动态拉伸",
+                "5分钟关节活动",
+                "10分钟轻度有氧",
+                "8分钟全身激活",
+                "7分钟动态瑜伽"
+            ];
+            
+            const cardioOptions = [
+                { name: "慢跑", duration: 20 },
+                { name: "快走", duration: 25 },
+                { name: "跳绳", duration: 15 },
+                { name: "骑行", duration: 30 },
+                { name: "游泳", duration: 20 },
+                { name: "椭圆机", duration: 25 },
+                { name: "划船机", duration: 20 }
+            ];
+            
+            const strengthOptions = [
+                { name: "深蹲", sets: 3, reps: 12 },
+                { name: "俯卧撑", sets: 3, reps: 15 },
+                { name: "平板支撑", sets: 3, duration: 45 },
+                { name: "仰卧起坐", sets: 3, reps: 20 },
+                { name: "箭步蹲", sets: 3, reps: 12 },
+                { name: "臀桥", sets: 3, reps: 15 },
+                { name: "引体向上", sets: 3, reps: 8 },
+                { name: "哑铃推举", sets: 3, reps: 12 },
+                { name: "划船", sets: 3, reps: 12 },
+                { name: "硬拉", sets: 3, reps: 10 }
+            ];
+            
+            const coolDownOptions = [
+                "5分钟静态拉伸",
+                "5分钟深度呼吸",
+                "8分钟瑜伽放松",
+                "7分钟泡沫轴放松"
+            ];
+            
+            // 根据用户条件和天数选择不同的项目组合
+            const warmup = warmupOptions[(dayIndex + 0) % warmupOptions.length];
+            const cardio = cardioOptions[(dayIndex + 1) % cardioOptions.length];
+            const strength1 = strengthOptions[(dayIndex + 2) % strengthOptions.length];
+            const strength2 = strengthOptions[(dayIndex + 3) % strengthOptions.length];
+            const strength3 = strengthOptions[(dayIndex + 4) % strengthOptions.length];
+            const coolDown = coolDownOptions[(dayIndex + 5) % coolDownOptions.length];
+            
+            // 根据用户水平调整强度
+            let intensity = "";
+            if (level === "beginner") {
+                intensity = "（适合初学者）";
+            } else if (level === "intermediate") {
+                intensity = "（适合中级水平）";
+            } else {
+                intensity = "（适合高级水平）";
+            }
+            
+            // 根据目标调整训练重点
+            let focus = "";
+            if (goal === "weight-loss") {
+                focus = "燃脂训练";
+            } else if (goal === "muscle-gain") {
+                focus = "增肌训练";
+            } else if (goal === "endurance") {
+                focus = "耐力训练";
+            } else if (goal === "flexibility") {
+                focus = "柔韧性训练";
+            } else {
+                focus = "综合训练";
+            }
+            
+            // 构建训练计划
+            let plan = `
+                <p><strong>目标：</strong>${focus} ${intensity}</p>
+                <p><strong>训练频率：</strong>${frequency}天/周，<strong>时长：</strong>${duration}分钟/次</p>
+                <ul>
+                    <li><i class="far fa-clock"></i> 热身：${warmup}</li>
+                    <li><i class="fas fa-heartbeat"></i> 有氧运动：${cardio.duration}分钟${cardio.name}</li>
+                    <li><i class="fas fa-dumbbell"></i> 力量训练1：${strength1.name}（${strength1.sets}组，${strength1.reps ? strength1.reps + '次' : strength1.duration + '秒'}）</li>
+                    <li><i class="fas fa-dumbbell"></i> 力量训练2：${strength2.name}（${strength2.sets}组，${strength2.reps ? strength2.reps + '次' : strength2.duration + '秒'}）</li>
+                    <li><i class="fas fa-dumbbell"></i> 力量训练3：${strength3.name}（${strength3.sets}组，${strength3.reps ? strength3.reps + '次' : strength3.duration + '秒'}）</li>
+                    <li><i class="fas fa-wind"></i> 放松：${coolDown}</li>
+                </ul>
+            `;
+            
+            return plan;
+        }
+
+        // 休息日计划
+        function generateRestDayPlan() {
+            const restActivities = [
+                "轻度散步30分钟",
+                "瑜伽或普拉提30分钟",
+                "深度拉伸20分钟",
+                "冥想和呼吸练习15分钟",
+                "轻度家务活动"
+            ];
+            
+            const activity = restActivities[Math.floor(Math.random() * restActivities.length)];
+            
+            return `
+                <p><strong>休息日安排</strong></p>
+                <ul>
+                    <li><i class="fas fa-bed"></i> 充分休息，保证8小时睡眠</li>
+                    <li><i class="fas fa-walking"></i> 轻度活动：${activity}</li>
+                    <li><i class="fas fa-tint"></i> 保持充足水分摄入</li>
+                    <li><i class="fas fa-utensils"></i> 注意营养均衡，避免暴饮暴食</li>
+                </ul>
+            `;
+        }
+
+        // 饮食计划生成（目标+饮食偏好）
+        function generateDietPlan(gender, age, height, weight, goal, diet, dayIndex) {
+            // 早餐选项
+            const breakfastOptions = [
+                "全麦面包+鸡蛋+牛奶+水果",
+                "燕麦粥+坚果+水果",
+                "酸奶+谷物+蓝莓",
+                "煎蛋+牛油果+全麦吐司",
+                "豆浆+包子+水果",
+                "牛奶+麦片+香蕉",
+                "全麦三明治+鸡蛋+蔬菜"
+            ];
+            
+            // 午餐选项
+            const lunchOptions = [
+                "糙米饭+鸡胸肉+西兰花",
+                "藜麦+三文鱼+蔬菜沙拉",
+                "全麦意面+牛肉+番茄酱",
+                "红薯+鸡胸肉+蔬菜",
+                "糙米饭+豆腐+蔬菜",
+                "全麦卷饼+鸡肉+蔬菜",
+                "米饭+鱼+青菜"
+            ];
+            
+            // 晚餐选项
+            const dinnerOptions = [
+                "烤鱼+蔬菜+红薯",
+                "鸡胸肉+蔬菜沙拉",
+                "豆腐+蔬菜+糙米饭",
+                "牛肉+西兰花+藜麦",
+                "鱼+蔬菜+少量米饭",
+                "鸡胸肉+蔬菜+少量红薯",
+                "豆腐汤+蔬菜+少量米饭"
+            ];
+            
+            // 根据用户条件和天数选择不同的饮食组合
+            const breakfast = breakfastOptions[(dayIndex + 0) % breakfastOptions.length];
+            const lunch = lunchOptions[(dayIndex + 1) % lunchOptions.length];
+            const dinner = dinnerOptions[(dayIndex + 2) % dinnerOptions.length];
+            
+            // 根据饮食偏好调整
+            let dietType = "";
+            let tips = "";
+            
+            if (diet === "high-protein") {
+                dietType = "高蛋白饮食";
+                tips = "每餐确保有足够的蛋白质来源，如鸡胸肉、鱼、蛋、豆制品等";
+            } else if (diet === "low-carb") {
+                dietType = "低碳水饮食";
+                tips = "控制碳水摄入，选择优质碳水如全麦、糙米、红薯等";
+            } else if (diet === "vegetarian") {
+                dietType = "素食饮食";
+                tips = "确保从豆制品、蛋类和乳制品中获取足够蛋白质";
+            } else if (diet === "vegan") {
+                dietType = "纯素饮食";
+                tips = "从豆类、坚果和藜麦中获取蛋白质，注意补充维生素B12";
+            } else if (diet === "mediterranean") {
+                dietType = "地中海饮食";
+                tips = "多食用橄榄油、鱼类、坚果和新鲜蔬果";
+            } else if (diet === "keto") {
+                dietType = "生酮饮食";
+                tips = "高脂肪、适量蛋白、极低碳水，注意电解质平衡";
+            } else {
+                dietType = "均衡饮食";
+                tips = "均衡摄入各类营养素，多样化选择食物";
+            }
+            
+            // 构建饮食计划
+            let plan = `
+                <p><strong>${dietType}建议：</strong></p>
+                <ul>
+                    <li><i class="fas fa-sun"></i> <strong>早餐：</strong>${breakfast}</li>
+                    <li><i class="fas fa-cloud-sun"></i> <strong>午餐：</strong>${lunch}</li>
+                    <li><i class="fas fa-moon"></i> <strong>晚餐：</strong>${dinner}</li>
+                    <li><i class="fas fa-apple-alt"></i> <strong>加餐建议：</strong>酸奶/坚果/水果</li>
+                    <li><i class="fas fa-tint"></i> <strong>饮水：</strong>至少2升水</li>
+                </ul>
+                <p><strong>温馨提示：</strong>${tips}</p>
+            `;
+            
+            return plan;
+        }
+
+        // 周计划模态框控制
+        document.getElementById('show-week-plan').addEventListener('click', function() {
+            const weekPlanData = JSON.parse(document.getElementById('plan-result').getAttribute('data-week-plan'));
+            const modal = document.getElementById('week-plan-modal');
+            const container = document.getElementById('week-plan-container');
+            
+            // 清空容器
+            container.innerHTML = '';
+            
+            // 生成周计划内容
+            weekPlanData.forEach(dayPlan => {
+                const dayElement = document.createElement('div');
+                dayElement.className = 'day-plan';
+                dayElement.innerHTML = `
+                    <h4>${dayPlan.day}</h4>
+                    <div class="plan-section">
+                        <h5>运动安排</h5>
+                        ${dayPlan.workout}
+                    </div>
+                    <div class="plan-section">
+                        <h5>饮食建议</h5>
+                        ${dayPlan.diet}
+                    </div>
+                `;
+                container.appendChild(dayElement);
+            });
+            
+            // 显示模态框
+            modal.style.display = 'block';
+        });
+
+        // 关闭模态框
+        document.querySelector('.close-modal').addEventListener('click', function() {
+            document.getElementById('week-plan-modal').style.display = 'none';
+        });
+
+        // 点击模态框外部关闭
+        window.addEventListener('click', function(event) {
+            const modal = document.getElementById('week-plan-modal');
+            if (event.target === modal) {
+                modal.style.display = 'none';
+            }
+        });
+
+        // 页面加载完成后执行
+        document.addEventListener('DOMContentLoaded', function() {
+            setCurrentDate();
+            // 平滑滚动到锚点
+            document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+                anchor.addEventListener('click', function(e) {
+                    e.preventDefault();
+                    const targetId = this.getAttribute('href');
+                    if(targetId === '#') return;
+                    const targetElement = document.querySelector(targetId);
+                    if(targetElement) {
+                        window.scrollTo({
+                            top: targetElement.offsetTop - 80,
+                            behavior: 'smooth'
+                        });
+                    }
+                });
+            });
+        });
+    </script>
+</body>
+</html>
